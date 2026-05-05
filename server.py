@@ -14,7 +14,7 @@ def search_hikes(latitude: float, longitude: float, radius_km: float = 5.0, name
     (
       way["highway"~"path|footway|track"](around:{radius_km * 1000},{latitude},{longitude});
     );
-    out body;
+    out tags;
     >;
     out skel qt;
     """
@@ -36,12 +36,16 @@ def search_hikes(latitude: float, longitude: float, radius_km: float = 5.0, name
                 if name_filter and name_filter.lower() not in name.lower():
                     continue
                 
-                hikes.append(f"- {name}")
+                # Attempt to extract difficulty (sac_scale is common in Norway)
+                difficulty = tags.get("sac_scale", "unknown")
+                trail_info = f"- {name} (Difficulty: {difficulty})"
+                
+                hikes.append(trail_info)
                 if len(hikes) >= 15: break
         
         if not hikes:
             return "No trails found (check your filters)."
-        return "Trails found:\n" + "\n".join(hikes)
+        return "Trails found (with difficulty if available):\n" + "\n".join(hikes)
         
     except Exception as e:
         return f"Error during Overpass request: {str(e)}"
