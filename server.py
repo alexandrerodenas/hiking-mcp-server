@@ -6,7 +6,7 @@ mcp = FastMCP("Hiking-Explorer")
 
 @mcp.tool()
 def search_hikes(latitude: float, longitude: float, radius_km: float = 5.0, name_filter: str = None) -> str:
-    """Recherche des sentiers de randonnée, avec option de filtrage par nom."""
+    """Search for hiking trails, with optional name filtering."""
     
     # ... (query remains the same)
     query = f"""
@@ -30,9 +30,9 @@ def search_hikes(latitude: float, longitude: float, radius_km: float = 5.0, name
         for el in elements:
             if el.get("type") == "way" and "tags" in el:
                 tags = el["tags"]
-                name = tags.get("name", "Sentier sans nom")
+                name = tags.get("name", "Unnamed trail")
                 
-                # Filtrage par nom si spécifié
+                # Filter by name if specified
                 if name_filter and name_filter.lower() not in name.lower():
                     continue
                 
@@ -40,11 +40,11 @@ def search_hikes(latitude: float, longitude: float, radius_km: float = 5.0, name
                 if len(hikes) >= 15: break
         
         if not hikes:
-            return "Aucun sentier trouvé (vérifie tes filtres)."
-        return "Sentiers trouvés :\n" + "\n".join(hikes)
+            return "No trails found (check your filters)."
+        return "Trails found:\n" + "\n".join(hikes)
         
     except Exception as e:
-        return f"Erreur lors de la requête Overpass : {str(e)}"
+        return f"Error during Overpass request: {str(e)}"
 
 if __name__ == "__main__":
     mcp.run()

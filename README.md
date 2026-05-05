@@ -1,20 +1,20 @@
 # Hiking MCP Server
 
-Un serveur MCP (Model Context Protocol) autonome pour rechercher des sentiers de randonnée via l'API Overpass (OpenStreetMap).
+An autonomous Model Context Protocol (MCP) server to search for hiking trails via the Overpass API (OpenStreetMap).
 
-## Fonctionnalités
-- Recherche de sentiers par coordonnées (lat, lon).
-- Filtrage par nom optionnel.
-- Utilisation de l'API Overpass pour des données en temps réel.
+## Features
+- Search for trails by coordinates (lat, lon).
+- Optional name filtering.
+- Uses Overpass API for real-time data.
 
 ## Installation
 
-1. Cloner le repo : `git clone https://github.com/alexandrerodenas/hiking-mcp-server`
-2. Créer l'environnement : `python3 -m venv venv && source venv/bin/activate`
-3. Installer les dépendances : `pip install mcp requests`
+1. Clone the repo: `git clone https://github.com/alexandrerodenas/hiking-mcp-server`
+2. Create virtual environment: `python3 -m venv venv && source venv/bin/activate`
+3. Install dependencies: `pip install mcp requests`
 
-## Utilisation
-Lance le serveur via le SDK MCP.
+## Usage
+Launch the server using the MCP SDK.
 
 ```bash
 python server.py
